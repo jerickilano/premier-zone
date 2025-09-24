@@ -1,5 +1,8 @@
+[providers]
+java = "21"
+
 [phases.setup]
-nixPkgs = ["jdk21", "maven"]
+nixPkgs = ["maven"]
 
 [phases.install]
 cmds = ["mvn clean install -DskipTests"]
