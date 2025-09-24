@@ -7,6 +7,11 @@ target/
 *.jar
 *.war
 
+# Maven wrapper (we're using system Maven)
+mvnw
+mvnw.cmd
+.mvn/
+
 # IDE files
 .idea/
 .vscode/

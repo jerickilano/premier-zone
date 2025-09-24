@@ -1,25 +1,23 @@
-# Use OpenJDK 21 as base image
-FROM openjdk:21-jdk-slim
+# Use Eclipse Temurin JDK 21 with Maven
+FROM eclipse-temurin:21-jdk-alpine
 
 # Set working directory
 WORKDIR /app
 
-# Copy only essential files first
-COPY pom.xml ./
-COPY mvnw ./
-COPY mvnw.cmd ./
+# Install Maven
+RUN apk add --no-cache maven
 
-# Make mvnw executable
-RUN chmod +x mvnw
+# Copy pom.xml first for better caching
+COPY pom.xml ./
 
 # Download dependencies (this layer will be cached if pom.xml doesn't change)
-RUN ./mvnw dependency:go-offline -B
+RUN mvn dependency:go-offline -B
 
 # Copy source code
 COPY src ./src
 
 # Build the application
-RUN ./mvnw clean package -DskipTests
+RUN mvn clean package -DskipTests
 
 # Expose port
 EXPOSE 8080
