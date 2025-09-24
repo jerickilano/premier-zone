@@ -4,10 +4,12 @@ FROM openjdk:21-jdk-slim
 # Set working directory
 WORKDIR /app
 
-# Copy Maven wrapper and pom.xml first for better caching
-COPY mvnw mvnw.cmd pom.xml ./
+# Copy only essential files first
+COPY pom.xml ./
+COPY mvnw ./
+COPY mvnw.cmd ./
 
-# Copy Maven wrapper permissions
+# Make mvnw executable
 RUN chmod +x mvnw
 
 # Download dependencies (this layer will be cached if pom.xml doesn't change)
