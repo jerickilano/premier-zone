@@ -9,7 +9,8 @@
 1. Click "New Project" in Railway dashboard
 2. Select "Deploy from GitHub repo"
 3. Choose your `premier-zone` repository
-4. Railway will automatically detect it's a Java/Spring Boot project
+4. **Important**: Set the root directory to `premier-zone-app` (not the root of the repo)
+5. Railway will use the `nixpacks.toml` file to build your Java/Spring Boot project
 
 ## Step 3: Add PostgreSQL Database
 1. In your Railway project, click "New"
@@ -55,6 +56,15 @@ railway up
 ```
 
 ## Troubleshooting
+
+### Build Plan Error
+If you get "Nixpacks was unable to generate a build plan" error:
+1. Ensure you've set the root directory to `premier-zone-app` in Railway service settings
+2. Verify that `nixpacks.toml` file exists in the `premier-zone-app` directory
+3. Check that `.railwayignore` file is present to exclude frontend files
+
+### Other Issues
 - Check Railway logs if deployment fails
 - Ensure all environment variables are set correctly
 - Verify database connection in Railway dashboard
+- Make sure Java 21 and Maven are available (handled by nixpacks.toml)

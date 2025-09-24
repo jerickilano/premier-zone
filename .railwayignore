@@ -1,0 +1,11 @@
+frontend/
+node_modules/
+target/
+*.log
+.git/
+.gitignore
+README.md
+HELP.md
+DATABASE_TROUBLESHOOTING.md
+deployment/
+prem_stats.csv
