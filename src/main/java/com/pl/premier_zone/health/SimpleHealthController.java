@@ -14,10 +14,26 @@ public class SimpleHealthController {
     @GetMapping("/simple")
     public Map<String, Object> simpleHealth() {
         Map<String, Object> response = new HashMap<>();
-        response.put("status", "UP");
-        response.put("message", "Application is running");
-        response.put("timestamp", System.currentTimeMillis());
-        return response;
+        try {
+            response.put("status", "UP");
+            response.put("message", "Application is running");
+            response.put("timestamp", System.currentTimeMillis());
+            response.put("uptime", System.currentTimeMillis() - getStartTime());
+            return response;
+        } catch (Exception e) {
+            response.put("status", "DOWN");
+            response.put("message", "Application error: " + e.getMessage());
+            response.put("timestamp", System.currentTimeMillis());
+            return response;
+        }
+    }
+    
+    private static final long startTime = System.currentTimeMillis();
+    
+    private long getStartTime() {
+        return startTime;
     }
 }
+
+
 

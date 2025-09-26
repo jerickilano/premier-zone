@@ -36,7 +36,6 @@ DATABASE_TROUBLESHOOTING.md
 # Deployment files
 deployment/
 railway.json
-nixpacks.toml
 .railwayignore
 
 # Data files
